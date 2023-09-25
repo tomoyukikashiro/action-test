@@ -1,0 +1,21 @@
+name: Assign Reviewers
+
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  assign-reviewers:
+    runs-on: ubuntu-latest
+    if: contains(github.event.pull_request.labels.*.name, 'test')
+    steps:
+      - uses: actions/github-script@v6
+        with:
+          github-token: ${{ steps.app-token.outputs.token }}
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '/assign frontend'
+            })
