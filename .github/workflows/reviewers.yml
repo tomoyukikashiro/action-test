@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     if: contains(github.event.pull_request.labels.*.name, 'test')
     permissions:
-      pull-requests: write
+      issues: write
     steps:
       - uses: actions/github-script@v6
         with:
