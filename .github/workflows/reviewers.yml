@@ -8,6 +8,8 @@ jobs:
   assign-reviewers:
     runs-on: ubuntu-latest
     if: contains(github.event.pull_request.labels.*.name, 'test')
+    permissions:
+      pull-requests: write
     steps:
       - uses: actions/github-script@v6
         with:
